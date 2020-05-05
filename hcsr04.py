@@ -1,17 +1,37 @@
+# Copyright (c) 2020 Francesco Pio Squillante
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 class hcsr04:
     
-    @c_native("read_hcsr04_raw", ["read_hcsr04.c"], [])
-    def _get_distance_raw(trig, echo):
+    @c_native("HCRS04_readDistanceRaw", ["csrc/hcsr04.c"], [])
+    def _getDistanceRaw(trig, echo):
         pass
     
-    def get_distance_raw(self):
-        return hcsr04._get_distance_raw(self.trigger, self.echo)
+    def getDistanceRaw(self):
+        return hcsr04._getDistanceRaw(self.trigger, self.echo)
     
-    def get_distance_cm(self):
-        return self.get_distance_raw() / 58
+    def getDistanceCM(self):
+        return self.getDistanceRaw() / 58
     
-    def get_distance_inch(self):
-        return self.get_distance_raw() / 148
+    def getDistanceINCH(self):
+        return self.getDistanceRaw() / 148
     
     def __init__(self, trigger, echo):
         self.trigger = trigger
